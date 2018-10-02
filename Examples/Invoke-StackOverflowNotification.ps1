@@ -1,3 +1,5 @@
+#! /usr/local/bin/pwsh
+
 #PowerShell script to notify when new PowerShell StackOverflow questions are published.
 
 #To run via crontab every 5 mins:
@@ -13,12 +15,17 @@ $LatestQuestion = Invoke-RestMethod "https://stackoverflow.com/feeds/tag?tagname
 $LatestQuestionID = $LatestQuestion.ID
 $QuestionTitle = $LatestQuestion.title.'#text'
 
-if (Test-Path $Home/LatestQuestion.txt) {
-    $PrevQuestionID = Get-Content $Home/LatestQuestion.txt
+$LatestQuestionPath = '/tmp/LatestQuestion.txt'
+
+if (Test-Path $LatestQuestionPath) {
+    $PrevQuestionID = Get-Content $LatestQuestionPath
 }
 
 If ($LatestQuestionID -ne $PrevQuestionID) {
-    Invoke-MacNotification -Title "New #$Category question on StackOverflow" -Message $QuestionTitle
-    $LatestQuestionID | Set-Content $Home/LatestQuestion.txt
-}
+    If (-not (Get-Module MacNotify -ListAvailable)) {
+        Install-Module MacNotify -Scope CurrentUser
+    }
 
+    Invoke-MacNotification -Title "New #$Category question on StackOverflow" -Message $QuestionTitle
+    $LatestQuestionID | Set-Content $LatestQuestionPath
+}

@@ -44,6 +44,10 @@ Note: the `-Sound` parameter uses a class to get a dynamic list of the available
 - '/Library/Sounds'
 - '~/Library/Sounds'
 
+## Examples
+
+For usage examples, see the /Examples folder.
+
 ## Cmdlets
 
 A full list of cmdlets in this module is provided below for reference. Use `Get-Help <cmdlet name>` with these to learn more about their usage.
