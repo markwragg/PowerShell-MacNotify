@@ -25,9 +25,9 @@ test_script:
   - pwsh: .\build.ps1
 
 on_success:
-  - cmd: git config --global credential.helper store
-  - ps: if (git status -s) { Add-Content "$HOME/.git-credentials" "https://$($env:GitToken):x-oauth-basic@github.com`n" }
-  - cmd: |
+  - pwsh: git config --global credential.helper store
+  - pwsh: if (git status -s) { Add-Content "$HOME/.git-credentials" "https://$($env:GitToken):x-oauth-basic@github.com`n" }
+  - pwsh: |
       git config --global user.email "build@appveyor.com"
       git config --global user.name "Appveyor"
       git checkout %APPVEYOR_REPO_BRANCH%
