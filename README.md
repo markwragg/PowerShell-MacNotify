@@ -4,7 +4,7 @@
 
 This PowerShell module contains a cmdlet for triggering a notification to appear on MacOS.
 
-# Installation
+## Installation
 
 The module is published in the PSGallery, so can be installed by running:
 
