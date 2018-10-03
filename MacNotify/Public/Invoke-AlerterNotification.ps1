@@ -78,7 +78,7 @@ Function Invoke-AlerterNotification {
             if ($Timeout)  { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
 
             If ($PSCmdlet.ShouldProcess("alerter $CommandString")) {
-                Invoke-Expression "$PSScriptRoot/../Bin/alerter $CommandString"
+                Invoke-Alerter $CommandString
             }
         }
     }
