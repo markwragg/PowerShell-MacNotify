@@ -27,6 +27,7 @@ if(
             To PSGallery
             WithOptions @{
                 ApiKey = $ENV:NuGetApiKey
+                Force = $true
             }
         }
     }
