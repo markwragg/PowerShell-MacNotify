@@ -1,4 +1,4 @@
-#! /usr/local/bin/pwsh
+#! /usr/local/bin/pwsh -noprofile
 
 #PowerShell script to notify when new PowerShell StackOverflow questions are published using 'Alerter', with the option
 #to then open the question by clicking 'show'.
@@ -29,7 +29,7 @@ If ($LatestQuestionID -ne $PrevQuestionID) {
 
     $Result = Invoke-AlerterNotification -Title "New #$Category question" -Message $QuestionTitle -Timeout 30 -AppIcon 'https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-icon.png'
     if ($Result -eq '@ACTIONCLICKED') {
-        open $LatestQuestionID
+        Invoke-Expression "open $LatestQuestionID"
     }
     $LatestQuestionID | Set-Content $LatestQuestionPath
 }

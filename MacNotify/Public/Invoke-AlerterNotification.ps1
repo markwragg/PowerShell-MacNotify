@@ -24,25 +24,30 @@ Function Invoke-AlerterNotification {
         .PARAMETER Title
             Optional: The title text you want to appear in the notification.
 
-        .PARAMETER Message
+        .PARAMETER Subtitle
             Optional: The subtitle text you want to appear in the notification.
 
         .PARAMETER Sound
             OptionaL: The alert sound you want to play when the notification appears. Must be one of the sounds from the default alert
             sounds paths: '/System/Library/Sounds/','/Library/Sounds','~/Library/Sounds'.
 
-        .EXAMPLE
-            Invoke-MacNotification -Message 'Hello!'
+        .PARAMETER Timeout
+                    Optional: Number of seconds to wait before dismissing the notification automatically. Default: waits indefinitely.
+
+        .PARAMETER AppIcon
+                    Optional: The path or URL to an image to display as the application icon for the notification.
 
         .EXAMPLE
-            Invoke-MacNotification -Message 'Hello! -Title 'Hello Message'
+            Invoke-AlerterNotification -Message 'Hello!'
 
         .EXAMPLE
-            Invoke-MacNotification -Message 'Hello!' -Sound 'Ping'
+            Invoke-AlerterNotification -Message 'Hello! -Title 'Hello Message' -Subtitle ':)' -Timeout 30 -AppIcon 'http://url.to/an/icon.png'
 
         .EXAMPLE
-            1,2,3 | Invoke-MacNotification -Title 'Numbers'
+            Invoke-AlerterNotification -Message 'Hello!' -Sound 'Ping'
 
+        .EXAMPLE
+            1,2,3 | Invoke-AlerterNotification -Title 'Numbers'
     #>
     [cmdletbinding(SupportsShouldProcess)]
     param(
@@ -75,10 +80,10 @@ Function Invoke-AlerterNotification {
             if ($Subtitle) { $CommandString = $CommandString + " -subtitle '$Subtitle'"}
             if ($Sound)    { $CommandString = $CommandString + " -sound '$Sound'"}
             if ($Timeout)  { $CommandString = $CommandString + " -timeout $Timeout"}
-            if ($Timeout)  { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
+            if ($AppIcon)  { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
 
             If ($PSCmdlet.ShouldProcess("alerter $CommandString")) {
-                Invoke-Alerter $CommandString
+                Invoke-Alerter -Command $CommandString
             }
         }
     }
