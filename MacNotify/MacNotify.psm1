@@ -9,3 +9,10 @@ $Private = @( Get-ChildItem -Path "$PSScriptRoot/Private/*.ps1" -Recurse )
         Write-Error -Message "Failed to import function $($_.FullName): $_"
     }
 }
+
+# Chek for and add execute permission to alerter if it's missing.
+$AlerterPath = Resolve-Path "$PSScriptRoot/Bin/alerter"
+
+if (-not (bash -c "test -x $AlerterPath && echo 1")) {
+    bash -c "chmod +x $AlerterPath"
+}
