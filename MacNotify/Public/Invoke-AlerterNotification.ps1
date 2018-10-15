@@ -1,8 +1,8 @@
 Class SoundNames : System.Management.Automation.IValidateSetValuesGenerator {
     [String[]] GetValidValues() {
 
-        $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/','/Library/Sounds','~/Library/Sounds') {
-            If (Test-Path $SoundPath) {
+        $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/', '/Library/Sounds', '~/Library/Sounds') {
+            if (Test-Path $SoundPath) {
                 (Get-ChildItem $SoundPath).BaseName
             }
         }
@@ -32,13 +32,25 @@ Function Invoke-AlerterNotification {
             sounds paths: '/System/Library/Sounds/','/Library/Sounds','~/Library/Sounds'.
 
         .PARAMETER Timeout
-                    Optional: Number of seconds to wait before dismissing the notification automatically. Default: waits indefinitely.
+            Optional: Number of seconds to wait before dismissing the notification automatically. Default: waits indefinitely.
 
         .PARAMETER AppIcon
-                    Optional: The path or URL to an image to display as the application icon for the notification.
+            Optional: The path or URL to an image to display as the application icon for the notification.
+        
+        .PARAMETER ContentImage
+            Optional: The path or URL to an image to display attached to the notification.
 
+        .PARAMETER Open
+            Optional: A file or URL path to open if the 'show' button of the notification is clicked.
+
+        .PARAMETER Raw
+            Switch: Return raw text output instead of PowerShell Object output.
+
+        .PARAMETER Silent
+            Switch: Use to not return any object output.
+        
         .EXAMPLE
-            Invoke-AlerterNotification -Message 'Hello!'
+            Invoke-AlerterNotification -Message "Click 'Show' to open Google." -Open 'https://www.google.com'
 
         .EXAMPLE
             Invoke-AlerterNotification -Message 'Hello! -Title 'Hello Message' -Subtitle ':)' -Timeout 30 -AppIcon 'http://url.to/an/icon.png'
@@ -51,7 +63,7 @@ Function Invoke-AlerterNotification {
     #>
     [cmdletbinding(SupportsShouldProcess)]
     param(
-        [Parameter(Mandatory,ValueFromPipeline,Position=0)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [String[]]
         $Message,
 
@@ -69,21 +81,51 @@ Function Invoke-AlerterNotification {
         $Timeout,
 
         [String]
-        $AppIcon
+        $AppIcon,
+
+        [String]
+        $ContentImage,
+
+        [String]
+        $Open,
+
+        [Switch]
+        $Raw,
+
+        [Switch]
+        $Silent
     )
     Begin {
     }
     Process {
         ForEach ($MessageText in $Message) {
             $CommandString = "-message '$MessageText'"
-            if ($Title)    { $CommandString = $CommandString + " -title '$Title'"}
-            if ($Subtitle) { $CommandString = $CommandString + " -subtitle '$Subtitle'"}
-            if ($Sound)    { $CommandString = $CommandString + " -sound '$Sound'"}
-            if ($Timeout)  { $CommandString = $CommandString + " -timeout $Timeout"}
-            if ($AppIcon)  { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
+            if ($Title)        { $CommandString = $CommandString + " -title '$Title'"}
+            if ($Subtitle)     { $CommandString = $CommandString + " -subtitle '$Subtitle'"}
+            if ($Sound)        { $CommandString = $CommandString + " -sound '$Sound'"}
+            if ($Timeout)      { $CommandString = $CommandString + " -timeout $Timeout"}
+            if ($AppIcon)      { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
+            if ($ContentImage) { $CommandString = $CommandString + " -contentImage '$ContentImage'"}
+            if (-not $Raw)     { $CommandString = $CommandString + " -json"}
+            
+            if ($PSCmdlet.ShouldProcess('Invoke-Alerter',"alerter $CommandString")) {
+                $Result = Invoke-Alerter -Command $CommandString
 
-            If ($PSCmdlet.ShouldProcess("alerter $CommandString")) {
-                Invoke-Alerter -Command $CommandString
+                if (-not $Raw) {
+                    $Result = $Result | ConvertFrom-Json
+                    if ($Result.deliveredAt)  { $Result.deliveredAt  = Get-Date $Result.deliveredAt }
+                    if ($Result.activationAt) { $Result.activationAt = Get-Date $Result.activationAt }    
+                }
+
+                if ($Open) { 
+                    if ($Result.activationType -eq 'actionClicked' -or $Result -eq '@ACTIONCLICKED') {
+                        Invoke-Expression "open $Open"
+                    }
+                }
+
+                if (-not $Silent) {
+                    Return $Result
+                }
             }
         }
     }

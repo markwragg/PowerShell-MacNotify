@@ -27,9 +27,15 @@ If ($LatestQuestionID -ne $PrevQuestionID) {
         Install-Module MacNotify -Scope CurrentUser
     }
 
-    $Result = Invoke-AlerterNotification -Title "New #$Category question" -Message $QuestionTitle -Timeout 30 -AppIcon 'https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-icon.png'
-    if ($Result -eq '@ACTIONCLICKED') {
-        Invoke-Expression "open $LatestQuestionID"
+    $AlerterParams = @{
+        Title   = "New #$Category question" 
+        Message = $QuestionTitle 
+        Timeout = 30
+        AppIcon = 'https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-icon.png'
+        Open    = $LatestQuestionID
     }
+
+    Invoke-AlerterNotification @AlerterParams -Silent
+    
     $LatestQuestionID | Set-Content $LatestQuestionPath
 }
