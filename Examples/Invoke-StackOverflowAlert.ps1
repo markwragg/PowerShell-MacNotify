@@ -28,14 +28,14 @@ If ($LatestQuestionID -ne $PrevQuestionID) {
     }
 
     $AlerterParams = @{
-        Title   = "New #$Category question" 
-        Message = $QuestionTitle 
+        Title   = "New #$Category question"
+        Message = $QuestionTitle
         Timeout = 30
         AppIcon = 'https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-icon.png'
         Open    = $LatestQuestionID
     }
 
     Invoke-AlerterNotification @AlerterParams -Silent
-    
+
     $LatestQuestionID | Set-Content $LatestQuestionPath
 }

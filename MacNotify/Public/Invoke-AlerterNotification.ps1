@@ -36,7 +36,7 @@ Function Invoke-AlerterNotification {
 
         .PARAMETER AppIcon
             Optional: The path or URL to an image to display as the application icon for the notification.
-        
+
         .PARAMETER ContentImage
             Optional: The path or URL to an image to display attached to the notification.
 
@@ -48,7 +48,7 @@ Function Invoke-AlerterNotification {
 
         .PARAMETER Silent
             Switch: Use to not return any object output.
-        
+
         .EXAMPLE
             Invoke-AlerterNotification -Message "Click 'Show' to open Google." -Open 'https://www.google.com'
 
@@ -107,17 +107,17 @@ Function Invoke-AlerterNotification {
             if ($AppIcon)      { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
             if ($ContentImage) { $CommandString = $CommandString + " -contentImage '$ContentImage'"}
             if (-not $Raw)     { $CommandString = $CommandString + " -json"}
-            
+
             if ($PSCmdlet.ShouldProcess('Invoke-Alerter',"alerter $CommandString")) {
                 $Result = Invoke-Alerter -Command $CommandString
 
                 if (-not $Raw) {
                     $Result = $Result | ConvertFrom-Json
                     if ($Result.deliveredAt)  { $Result.deliveredAt  = Get-Date $Result.deliveredAt }
-                    if ($Result.activationAt) { $Result.activationAt = Get-Date $Result.activationAt }    
+                    if ($Result.activationAt) { $Result.activationAt = Get-Date $Result.activationAt }
                 }
 
-                if ($Open) { 
+                if ($Open) {
                     if ($Result.activationType -eq 'actionClicked' -or $Result -eq '@ACTIONCLICKED') {
                         Invoke-Expression "open $Open"
                     }
