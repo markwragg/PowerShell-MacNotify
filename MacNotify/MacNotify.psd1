@@ -12,7 +12,7 @@
 RootModule = 'MacNotify.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.16'
+ModuleVersion = '1.1.18'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -119,7 +119,7 @@ PrivateData = @{
         # ExternalModuleDependencies = @()
 
     } # End of PSData hashtable
-
+    
  } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
@@ -129,3 +129,4 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
+
