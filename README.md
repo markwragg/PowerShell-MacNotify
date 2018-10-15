@@ -4,6 +4,8 @@
 
 This PowerShell module contains cmdlets for triggering notifications to appear on MacOS.
 
+![alt text](https://github.com/markwragg/PowerShell-MacNotify/raw/master/Media/Invoke-StackOverflowAlert.png "Example of Invoke-StackOverflowAlert")
+
 ## Installation
 
 The module is published in the PSGallery, so can be installed by running:
