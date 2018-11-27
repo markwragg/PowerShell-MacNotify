@@ -24,7 +24,7 @@ Function Invoke-MacNotification {
         .PARAMETER Title
             Optional: The title text you want to appear in the notification.
 
-        .PARAMETER Message
+        .PARAMETER Subtitle
             Optional: The subtitle text you want to appear in the notification.
 
         .PARAMETER Sound
