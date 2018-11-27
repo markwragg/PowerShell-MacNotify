@@ -35,7 +35,7 @@ Function Invoke-AlerterNotification {
             Optional: Number of seconds to wait before dismissing the notification automatically. Default: waits indefinitely.
 
         .PARAMETER AppIcon
-            Optional: The path or URL to an image to display as the application icon for the notification.
+            Optional: The path or URL to an image to display as the application icon for the notification. Alias: Icon
 
         .PARAMETER ContentImage
             Optional: The path or URL to an image to display attached to the notification.
@@ -80,6 +80,7 @@ Function Invoke-AlerterNotification {
         [Int32]
         $Timeout,
 
+        [alias("Icon")]
         [String]
         $AppIcon,
 
