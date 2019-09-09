@@ -1,12 +1,15 @@
-Class SoundNames : System.Management.Automation.IValidateSetValuesGenerator {
-    [String[]] GetValidValues() {
+if (-not ('SoundNames' -as [type])) {
+    
+    Class SoundNames : System.Management.Automation.IValidateSetValuesGenerator {
+        [String[]] GetValidValues() {
 
-        $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/','/Library/Sounds','~/Library/Sounds') {
-            If (Test-Path $SoundPath) {
-                (Get-ChildItem $SoundPath).BaseName
+            $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/', '/Library/Sounds', '~/Library/Sounds') {
+                if (Test-Path $SoundPath) {
+                    (Get-ChildItem $SoundPath).BaseName
+                }
             }
+            return [string[]] $SoundNames
         }
-        return [string[]] $SoundNames
     }
 }
 Function Invoke-MacNotification {

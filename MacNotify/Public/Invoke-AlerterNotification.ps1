@@ -1,14 +1,18 @@
-Class SoundNames : System.Management.Automation.IValidateSetValuesGenerator {
-    [String[]] GetValidValues() {
+if (-not ('SoundNames' -as [type])) {
+    
+    Class SoundNames : System.Management.Automation.IValidateSetValuesGenerator {
+        [String[]] GetValidValues() {
 
-        $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/', '/Library/Sounds', '~/Library/Sounds') {
-            if (Test-Path $SoundPath) {
-                (Get-ChildItem $SoundPath).BaseName
+            $SoundNames = ForEach ($SoundPath in '/System/Library/Sounds/', '/Library/Sounds', '~/Library/Sounds') {
+                if (Test-Path $SoundPath) {
+                    (Get-ChildItem $SoundPath).BaseName
+                }
             }
+            return [string[]] $SoundNames
         }
-        return [string[]] $SoundNames
     }
 }
+
 Function Invoke-AlerterNotification {
     <#
         .SYNOPSIS
@@ -101,20 +105,20 @@ Function Invoke-AlerterNotification {
     Process {
         ForEach ($MessageText in $Message) {
             $CommandString = "-message '$MessageText'"
-            if ($Title)        { $CommandString = $CommandString + " -title '$Title'"}
-            if ($Subtitle)     { $CommandString = $CommandString + " -subtitle '$Subtitle'"}
-            if ($Sound)        { $CommandString = $CommandString + " -sound '$Sound'"}
-            if ($Timeout)      { $CommandString = $CommandString + " -timeout $Timeout"}
-            if ($AppIcon)      { $CommandString = $CommandString + " -appIcon '$AppIcon'"}
-            if ($ContentImage) { $CommandString = $CommandString + " -contentImage '$ContentImage'"}
-            if (-not $Raw)     { $CommandString = $CommandString + " -json"}
+            if ($Title) { $CommandString = $CommandString + " -title '$Title'" }
+            if ($Subtitle) { $CommandString = $CommandString + " -subtitle '$Subtitle'" }
+            if ($Sound) { $CommandString = $CommandString + " -sound '$Sound'" }
+            if ($Timeout) { $CommandString = $CommandString + " -timeout $Timeout" }
+            if ($AppIcon) { $CommandString = $CommandString + " -appIcon '$AppIcon'" }
+            if ($ContentImage) { $CommandString = $CommandString + " -contentImage '$ContentImage'" }
+            if (-not $Raw) { $CommandString = $CommandString + " -json" }
 
-            if ($PSCmdlet.ShouldProcess('Invoke-Alerter',"alerter $CommandString")) {
+            if ($PSCmdlet.ShouldProcess('Invoke-Alerter', "alerter $CommandString")) {
                 $Result = Invoke-Alerter -Command $CommandString
 
                 if (-not $Raw) {
                     $Result = $Result | ConvertFrom-Json
-                    if ($Result.deliveredAt)  { $Result.deliveredAt  = Get-Date $Result.deliveredAt }
+                    if ($Result.deliveredAt) { $Result.deliveredAt = Get-Date $Result.deliveredAt }
                     if ($Result.activationAt) { $Result.activationAt = Get-Date $Result.activationAt }
                 }
 
