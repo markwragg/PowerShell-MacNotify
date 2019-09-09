@@ -1,6 +1,6 @@
 # PowerShell-MacNotify
 
-[![Build status](https://ci.appveyor.com/api/projects/status/5am4rqhoegc791mb?svg=true)](https://ci.appveyor.com/project/markwragg/powershell-macnotify) ![Test Coverage](https://img.shields.io/badge/coverage-55%25-red.svg?maxAge=60)
+[![Build Status](https://dev.azure.com/markwragg/GitHub/_apis/build/status/markwragg.PowerShell-MacNotify?branchName=master)](https://dev.azure.com/markwragg/GitHub/_build/latest?definitionId=5&branchName=master) ![Test Coverage](https://img.shields.io/badge/coverage-55%25-red.svg?maxAge=60)
 
 This PowerShell module contains cmdlets for triggering notifications to appear on MacOS.
 
