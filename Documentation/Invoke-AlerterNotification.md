@@ -7,8 +7,8 @@ Triggers an alerter notification to appear in OSX with the specified message and
 
 ```
 Invoke-AlerterNotification [-Message] <String[]> [-Title <String>] [-Subtitle <String>] [-Sound <String>]
- [-Timeout <Int32>] [-AppIcon <String>] [-ContentImage <String>] [-Open <String>] [-Raw] [-Silent] [-WhatIf]
- [-Confirm] [<CommonParameters>]
+ [-Timeout <Int32>] [-AppIcon <String>] [-ContentImage <String>] [-Open <String>] [-Raw] [-Silent]
+ [-ProgressAction <ActionPreference>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -217,6 +217,21 @@ Prompts you for confirmation before running the cmdlet.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ProgressAction
+{{Fill ProgressAction Description}}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
 
 Required: False
 Position: Named
