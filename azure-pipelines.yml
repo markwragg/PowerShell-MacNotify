@@ -4,7 +4,7 @@ variables:
 # Build Pipeline
 pool:
   # What environment will the build agent run on? (Windows / Linux / macOS)
-  vmImage: "macOS-10.14"
+  vmImage: "macOS-11"
 
 trigger:
   batch: true
