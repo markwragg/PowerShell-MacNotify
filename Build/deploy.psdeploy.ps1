@@ -9,8 +9,9 @@ else {
 }
 
 Write-Host "ModuleSourcePath: $ModuleSourcePath"
-
-ls Env:
+Write-Host "env:BHBuildSystem:" $env:BHBuildSystem
+Write-Host "env:BHBranchName:" $env:BHBranchName
+Write-Host "env:NugetApiKey:" $env:NugetApiKey
 
 if (
     $ModuleSourcePath -and
