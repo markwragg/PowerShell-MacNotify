@@ -27,11 +27,21 @@ if ($PSBoundParameters.Keys -contains 'ResolveDependency') {
     # Bootstrap environment
     Get-PackageProvider -Name 'NuGet' -ForceBootstrap | Out-Null
 
+    # Install PSYaml module if it is not already installed
+    if (-not (Get-Module -Name 'PSYaml' -ListAvailable)) {
+        Write-Output "`nPSYaml is not yet installed...installing PSYaml now..."
+        Install-Module -Name 'PSYaml' -Scope 'CurrentUser' -Force
+    }
+    else {
+        Write-Output "`nPSYaml already installed...skipping."
+    }
+
     # Install PSDepend module if it is not already installed
     if (-not (Get-Module -Name 'PSDepend' -ListAvailable)) {
         Write-Output "`nPSDepend is not yet installed...installing PSDepend now..."
         Install-Module -Name 'PSDepend' -Scope 'CurrentUser' -Force
-    } else {
+    }
+    else {
         Write-Output "`nPSDepend already installed...skipping."
     }
 
@@ -51,7 +61,8 @@ if ($PSBoundParameters.Keys -contains 'ResolveDependency') {
 
     # Remove ResolveDependency PSBoundParameter ready for passthru to PSake
     $PSBoundParameters.Remove('ResolveDependency')
-} else {
+}
+else {
     Write-Host "Skipping dependency check...`n" -ForegroundColor 'Yellow'
 }
 
