@@ -48,7 +48,7 @@ if ($PSBoundParameters.Keys -contains 'ResolveDependency') {
         Install = $true
         # Verbose = $true
     }
-    Invoke-PSDepend @invokePSDependParams -ErrorAction SilentlyContinue
+    Invoke-PSDepend @invokePSDependParams
 
     # Remove ResolveDependency PSBoundParameter ready for passthru to PSake
     $PSBoundParameters.Remove('ResolveDependency')
