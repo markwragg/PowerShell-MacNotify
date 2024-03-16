@@ -244,13 +244,15 @@ Task 'Deploy' -Depends 'Init' {
 
         if ($ChangeLog -contains '## !Deploy') {
 
+            <#
             $Params = @{
                 Path    = "$ProjectRoot/Build/deploy.psdeploy.ps1"
                 Force   = $true
                 Recurse = $false
             }
 
-            # Invoke-PSDeploy @Verbose @Params
+            Invoke-PSDeploy @Verbose @Params
+            #>
 
             & $PSScriptRoot\deploy.psdeploy.ps1
 

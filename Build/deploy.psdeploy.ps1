@@ -8,6 +8,10 @@ else {
     $ModuleSourcePath = $env:BHPSModulePath
 }
 
+Write-Host "ModuleSourcePath: $ModuleSourcePath"
+
+ls Env:
+
 if (
     $ModuleSourcePath -and
     $env:BHBuildSystem -ne 'Unknown' -and
