@@ -239,7 +239,7 @@ Task 'Deploy' -Depends 'Init' {
     }
 
     if (Get-Item "$ProjectRoot/CHANGELOG.md") {
-        
+
         $ChangeLog = Get-Content "$ProjectRoot/CHANGELOG.md"
 
         if ($ChangeLog -contains '## !Deploy') {
@@ -250,7 +250,9 @@ Task 'Deploy' -Depends 'Init' {
                 Recurse = $false
             }
 
-            Invoke-PSDeploy @Verbose @Params
+            # Invoke-PSDeploy @Verbose @Params
+
+            & $PSScriptRoot\deploy.psdeploy.ps1
 
             # Update ChangeLog with deployment version and date
             $ChangeLog = $ChangeLog -replace '## !Deploy', "## [$Version] - $(Get-Date -Format 'yyyy-MM-dd')"

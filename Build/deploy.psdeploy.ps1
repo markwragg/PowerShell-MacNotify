@@ -14,6 +14,7 @@ if (
     $env:BHBranchName -eq "master" -and
     $ENV:NugetApiKey
 ) {
+    <#
     Deploy Module {
         By PSGalleryModule {
             FromSource $ModuleSourcePath
@@ -23,6 +24,10 @@ if (
             }
         }
     }
+    #>
+
+    Publish-Module -Path $ModuleSourcePath -NugetAPIKey $ENV:NugetApiKey
+
 } else {
     "Skipping deployment: To deploy, ensure that...`n" +
     "`t* You are in a known build system (Current: $ENV:BHBuildSystem)`n" +
