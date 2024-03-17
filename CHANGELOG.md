@@ -1,6 +1,6 @@
 # Change Log
 
-## !Deploy
+## [1.1.30] - 2024-03-17
 
 * Fixed Invoke-MacNotification and Invoke-AlertNotification to handle single or double quotes in the message, title or subtitle. Fixes #3.
 
