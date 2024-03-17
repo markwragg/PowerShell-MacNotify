@@ -8,11 +8,6 @@ else {
     $ModuleSourcePath = $env:BHPSModulePath
 }
 
-Write-Host "ModuleSourcePath: $ModuleSourcePath"
-Write-Host "env:BHBuildSystem:" $env:BHBuildSystem
-Write-Host "env:BHBranchName:" $env:BHBranchName
-Write-Host "env:NugetApiKey:" $env:NugetApiKey
-
 if (
     $ModuleSourcePath -and
     $env:BHBuildSystem -ne 'Unknown' -and
