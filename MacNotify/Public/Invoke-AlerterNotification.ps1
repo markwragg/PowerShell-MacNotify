@@ -62,7 +62,7 @@ Function Invoke-AlerterNotification {
         [String]
         $Subtitle,
 
-        [ValidateSet([SoundNames])]
+        [ValidateSet('Basso','Blow','Bottle','Frog','Funk','Glass','Hero','Morse','Ping','Pop','Purr','Sosumi','Submarine','Tink')]
         [String]
         $Sound,
 

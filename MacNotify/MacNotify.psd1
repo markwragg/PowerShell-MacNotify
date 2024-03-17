@@ -12,7 +12,7 @@
 RootModule = 'MacNotify.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.28'
+ModuleVersion = '1.1.29'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()

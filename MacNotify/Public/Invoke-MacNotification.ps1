@@ -45,7 +45,7 @@ Function Invoke-MacNotification {
         [String]
         $Subtitle,
 
-        [ValidateSet([SoundNames])]
+        [ValidateSet('Basso','Blow','Bottle','Frog','Funk','Glass','Hero','Morse','Ping','Pop','Purr','Sosumi','Submarine','Tink')]
         [String]
         $Sound
     )
@@ -53,10 +53,10 @@ Function Invoke-MacNotification {
     }
     Process {
         ForEach ($MessageText in $Message) {
-            $CommandString = "display notification \`"$MessageText\`""
-            if ($Title)    { $CommandString = $CommandString + " with title \`"$Title\`""}
-            if ($Subtitle) { $CommandString = $CommandString + " subtitle \`"$Subtitle\`""}
-            if ($Sound)    { $CommandString = $CommandString + " sound name \`"$Sound\`""}
+            $CommandString = "display notification `"$MessageText`""
+            if ($Title)    { $CommandString = $CommandString + " with title `"$Title`""}
+            if ($Subtitle) { $CommandString = $CommandString + " subtitle `"$Subtitle`""}
+            if ($Sound)    { $CommandString = $CommandString + " sound name `"$Sound`""}
 
             If ($PSCmdlet.ShouldProcess('Invoke-AppleScript',$CommandString)) {
                 Invoke-AppleScript $CommandString
