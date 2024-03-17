@@ -1,6 +1,6 @@
 # Change Log
 
-## [1.1.28] - 2024-03-16
+## !Deploy
 
 * Test deployment having removed dependency of PSDeploy due to issues on MacOS.
 

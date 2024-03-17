@@ -254,7 +254,7 @@ Task 'Deploy' -Depends 'Init' {
             Invoke-PSDeploy @Verbose @Params
             #>
 
-            & $PSScriptRoot\deploy.psdeploy.ps1
+            . $PSScriptRoot\deploy.psdeploy.ps1
 
             # Update ChangeLog with deployment version and date
             $ChangeLog = $ChangeLog -replace '## !Deploy', "## [$Version] - $(Get-Date -Format 'yyyy-MM-dd')"
