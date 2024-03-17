@@ -53,6 +53,9 @@ Function Invoke-MacNotification {
     }
     Process {
         ForEach ($MessageText in $Message) {
+            $MessageText = $MessageText -replace '"','\"'
+            $Title = $Title -replace '"','\"'
+            $Subtitle = $Subtitle -replace '"','\"'
             $CommandString = "display notification `"$MessageText`""
             if ($Title)    { $CommandString = $CommandString + " with title `"$Title`""}
             if ($Subtitle) { $CommandString = $CommandString + " subtitle `"$Subtitle`""}

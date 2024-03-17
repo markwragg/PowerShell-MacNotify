@@ -8,7 +8,7 @@ Get-Module $Module | Remove-Module -Force
 Import-Module "$Root/$Module" -Force
 
 Describe "Invoke-MacNotification PS$PSVersion" {
-    
+
     InModuleScope MacNotify {
         Mock Invoke-AppleScript {}
 
@@ -24,5 +24,5 @@ Describe "Invoke-MacNotification PS$PSVersion" {
             Invoke-MacNotification -Message 'How are you' -Subtitle 'Test Subtitle' | Should -Be $null
             Assert-MockCalled Invoke-AppleScript -Times 1 -Exactly -Scope It
         }
-    }   
+    }
 }

@@ -89,13 +89,16 @@ Function Invoke-AlerterNotification {
     }
     Process {
         ForEach ($MessageText in $Message) {
-            $CommandString = "-message '$MessageText'"
-            if ($Title) { $CommandString = $CommandString + " -title '$Title'" }
-            if ($Subtitle) { $CommandString = $CommandString + " -subtitle '$Subtitle'" }
-            if ($Sound) { $CommandString = $CommandString + " -sound '$Sound'" }
+            $MessageText = $MessageText -replace '"','""'
+            $Title = $Title -replace '"','""'
+            $Subtitle = $Subtitle -replace '"','""'
+            $CommandString = "-message `"$MessageText`""
+            if ($Title) { $CommandString = $CommandString + " -title `"$Title`"" }
+            if ($Subtitle) { $CommandString = $CommandString + " -subtitle `"$Subtitle`"" }
+            if ($Sound) { $CommandString = $CommandString + " -sound `"$Sound`"" }
             if ($Timeout) { $CommandString = $CommandString + " -timeout $Timeout" }
-            if ($AppIcon) { $CommandString = $CommandString + " -appIcon '$AppIcon'" }
-            if ($ContentImage) { $CommandString = $CommandString + " -contentImage '$ContentImage'" }
+            if ($AppIcon) { $CommandString = $CommandString + " -appIcon `"$AppIcon`"" }
+            if ($ContentImage) { $CommandString = $CommandString + " -contentImage `"$ContentImage`"" }
             if (-not $Raw) { $CommandString = $CommandString + " -json" }
 
             if ($PSCmdlet.ShouldProcess('Invoke-Alerter', "alerter $CommandString")) {
