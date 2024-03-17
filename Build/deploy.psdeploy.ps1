@@ -16,8 +16,8 @@ Write-Host "env:NugetApiKey:" $env:NugetApiKey
 if (
     $ModuleSourcePath -and
     $env:BHBuildSystem -ne 'Unknown' -and
-    $env:BHBranchName -eq "master" -and
-    $ENV:NugetApiKey
+    $env:BHBranchName -eq "master" #-and
+    #$ENV:NugetApiKey
 ) {
     <#
     Deploy Module {
