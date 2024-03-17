@@ -43,6 +43,8 @@ steps:
   - pwsh: |
       .\Build\build.ps1 -TaskList 'Deploy'
     displayName: "Deploy"
+    env: 
+      NugetApiKey: $(NugetApiKey)
 
   - pwsh: |
       .\Build\build.ps1 -TaskList 'Commit'

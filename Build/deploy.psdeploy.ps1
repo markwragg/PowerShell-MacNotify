@@ -16,8 +16,8 @@ Write-Host "env:NugetApiKey:" $env:NugetApiKey
 if (
     $ModuleSourcePath -and
     $env:BHBuildSystem -ne 'Unknown' -and
-    $env:BHBranchName -eq "master" #-and
-    #$ENV:NugetApiKey
+    $env:BHBranchName -eq "master" -and
+    $env:NugetApiKey
 ) {
     <#
     Deploy Module {
@@ -31,7 +31,7 @@ if (
     }
     #>
 
-    Publish-Module -Path $ModuleSourcePath -NugetAPIKey $ENV:NugetApiKey
+    Publish-Module -Path $ModuleSourcePath -NugetAPIKey $env:NugetApiKey
 
 } else {
     "Skipping deployment: To deploy, ensure that...`n" +
