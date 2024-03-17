@@ -1,6 +1,6 @@
 # Change Log
 
-## !Deploy
+## [1.1.29] - 2024-03-17
 
 This version of MacNotify has been tested under MacOS 14 and works. It may not work in earlier versions. Version 1.1.27 was tested and working in MacOS 10.
 
