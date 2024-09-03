@@ -1,5 +1,9 @@
 # Change Log
 
+## !Deploy
+
+* Fixed module unintentionally exposing private functions per [#5](https://github.com/markwragg/PowerShell-MacNotify/issues/5). (Thanks [@ElianFabian](https://github.com/ElianFabian)!)
+
 ## [1.1.30] - 2024-03-17
 
 * Fixed Invoke-MacNotification and Invoke-AlertNotification to handle single or double quotes in the message, title or subtitle. Fixes #3.
