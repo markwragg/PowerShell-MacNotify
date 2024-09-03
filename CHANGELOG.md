@@ -1,6 +1,6 @@
 # Change Log
 
-## !Deploy
+## [1.1.31] - 2024-09-03
 
 * Fixed module unintentionally exposing private functions per [#5](https://github.com/markwragg/PowerShell-MacNotify/issues/5). (Thanks [@ElianFabian](https://github.com/ElianFabian)!)
 
