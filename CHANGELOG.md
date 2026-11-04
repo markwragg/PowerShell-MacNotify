@@ -1,6 +1,6 @@
 # Change Log
 
-## !Deploy
+## [1.1.32] - 2026-11-04
 
 * Fixed `Invoke-Alerter` resolving the bundled `alerter` binary via a path relative to its own source file. This happened to work when running from a dev checkout, but broke for every module installed via `Install-Module`/the PowerShell Gallery, where all functions are combined into a single file at the module root during build -- `Invoke-AlerterNotification` would fail to find `alerter` at all once installed.
 * Fixed `Invoke-AlerterNotification` dropping every message after the first when more than one `-Message` value was passed in a single call (e.g. `-Message 'First','Second'`), caused by a `Return` inside the per-message loop that exited the whole function instead of just that iteration. Pipeline input (e.g. `1,2,3 | Invoke-AlerterNotification`) was not affected.
