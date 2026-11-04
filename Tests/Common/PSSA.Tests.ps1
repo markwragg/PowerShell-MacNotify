@@ -1,19 +1,26 @@
 # This runs all PSScriptAnalyzer rules as Pester tests to enable visibility when publishing test results
-# Vars
-$ScriptAnalyzerSettingsPath = Join-Path -Path $env:BHProjectPath -ChildPath 'PSScriptAnalyzerSettings.psd1'
+BeforeDiscovery {
+    $ScriptAnalyzerSettingsPath = Join-Path -Path $env:BHProjectPath -ChildPath 'PSScriptAnalyzerSettings.psd1'
+    $analysis = Invoke-ScriptAnalyzer -Path $env:BHModulePath -Recurse -Settings $ScriptAnalyzerSettingsPath
+
+    # Built as test cases (rather than looping forEach { It { ... } } directly) because a plain
+    # loop's $rule/$analysis variables are shared by reference across every It scriptblock it
+    # creates -- under Pester's discovery/run split they'd all end up resolving to the loop's
+    # final value at run time instead of the value from their own iteration.
+    $ScriptAnalyzerRuleCases = Get-ScriptAnalyzerRule | ForEach-Object {
+        $RuleName = $_.RuleName
+        @{
+            RuleName = $RuleName
+            Failures = @($analysis | Where-Object { $_.RuleName -eq $RuleName })
+        }
+    }
+}
 
 Describe 'Testing against PSSA rules' {
     Context 'PSSA Standard Rules' {
-        $analysis = Invoke-ScriptAnalyzer -Path $env:BHModulePath -Recurse -Settings $ScriptAnalyzerSettingsPath
-        $scriptAnalyzerRules = Get-ScriptAnalyzerRule
-
-        forEach ($rule in $scriptAnalyzerRules) {
-            It "Should pass $rule" {
-                If ($analysis.RuleName -contains $rule) {
-                    $analysis | Where-Object RuleName -EQ $rule -OutVariable 'failures' | Out-Default
-                    $failures.Count | Should Be 0
-                }
-            }
+        It "Should pass <RuleName>" -ForEach $ScriptAnalyzerRuleCases {
+            $Failures | Out-Default
+            $Failures.Count | Should -Be 0
         }
     }
 }
