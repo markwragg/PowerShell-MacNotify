@@ -1,5 +1,12 @@
 # Change Log
 
+## !Deploy
+
+* Fixed `Invoke-Alerter` resolving the bundled `alerter` binary via a path relative to its own source file. This happened to work when running from a dev checkout, but broke for every module installed via `Install-Module`/the PowerShell Gallery, where all functions are combined into a single file at the module root during build -- `Invoke-AlerterNotification` would fail to find `alerter` at all once installed.
+* Fixed `Invoke-AlerterNotification` dropping every message after the first when more than one `-Message` value was passed in a single call (e.g. `-Message 'First','Second'`), caused by a `Return` inside the per-message loop that exited the whole function instead of just that iteration. Pipeline input (e.g. `1,2,3 | Invoke-AlerterNotification`) was not affected.
+* Fixed `Invoke-MacNotification` and `Invoke-AlerterNotification` progressively double-escaping an already-escaped `-Title`/`-Subtitle` containing double quotes when more than one message was processed in a single call.
+* Added test coverage for the above, plus the previously untested `Invoke-Alerter` and `Invoke-AppleScript` private functions and several untested `Invoke-AlerterNotification` parameters/branches (`-Sound`, `-Timeout`, `-AppIcon`, `-ContentImage`, `-Open`, `-Raw`, `-Silent`).
+
 ## [1.1.31] - 2024-09-03
 
 * Fixed module unintentionally exposing private functions per [#5](https://github.com/markwragg/PowerShell-MacNotify/issues/5). (Thanks [@ElianFabian](https://github.com/ElianFabian)!)

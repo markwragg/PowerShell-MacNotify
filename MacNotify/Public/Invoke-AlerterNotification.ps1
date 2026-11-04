@@ -89,12 +89,15 @@ Function Invoke-AlerterNotification {
     }
     Process {
         ForEach ($MessageText in $Message) {
-            $MessageText = $MessageText -replace '"','""'
-            $Title = $Title -replace '"','""'
-            $Subtitle = $Subtitle -replace '"','""'
-            $CommandString = "-message `"$MessageText`""
-            if ($Title) { $CommandString = $CommandString + " -title `"$Title`"" }
-            if ($Subtitle) { $CommandString = $CommandString + " -subtitle `"$Subtitle`"" }
+            # Escaped into local copies rather than overwriting $Title/$Subtitle -- those are bound once for
+            # the whole call (not per pipeline item), so re-escaping them in place on a second loop iteration
+            # would double-escape an already-escaped value.
+            $EscapedMessageText = $MessageText -replace '"','""'
+            $EscapedTitle = $Title -replace '"','""'
+            $EscapedSubtitle = $Subtitle -replace '"','""'
+            $CommandString = "-message `"$EscapedMessageText`""
+            if ($Title) { $CommandString = $CommandString + " -title `"$EscapedTitle`"" }
+            if ($Subtitle) { $CommandString = $CommandString + " -subtitle `"$EscapedSubtitle`"" }
             if ($Sound) { $CommandString = $CommandString + " -sound `"$Sound`"" }
             if ($Timeout) { $CommandString = $CommandString + " -timeout $Timeout" }
             if ($AppIcon) { $CommandString = $CommandString + " -appIcon `"$AppIcon`"" }
@@ -117,7 +120,7 @@ Function Invoke-AlerterNotification {
                 }
 
                 if (-not $Silent) {
-                    Return $Result
+                    $Result
                 }
             }
         }

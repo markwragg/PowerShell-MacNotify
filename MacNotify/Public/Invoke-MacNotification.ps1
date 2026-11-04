@@ -53,12 +53,12 @@ Function Invoke-MacNotification {
     }
     Process {
         ForEach ($MessageText in $Message) {
-            $MessageText = $MessageText -replace '"','\"'
-            $Title = $Title -replace '"','\"'
-            $Subtitle = $Subtitle -replace '"','\"'
-            $CommandString = "display notification `"$MessageText`""
-            if ($Title)    { $CommandString = $CommandString + " with title `"$Title`""}
-            if ($Subtitle) { $CommandString = $CommandString + " subtitle `"$Subtitle`""}
+            $EscapedMessageText = $MessageText -replace '"','\"'
+            $EscapedTitle = $Title -replace '"','\"'
+            $EscapedSubtitle = $Subtitle -replace '"','\"'
+            $CommandString = "display notification `"$EscapedMessageText`""
+            if ($Title)    { $CommandString = $CommandString + " with title `"$EscapedTitle`""}
+            if ($Subtitle) { $CommandString = $CommandString + " subtitle `"$EscapedSubtitle`""}
             if ($Sound)    { $CommandString = $CommandString + " sound name `"$Sound`""}
 
             If ($PSCmdlet.ShouldProcess('Invoke-AppleScript',$CommandString)) {

@@ -10,7 +10,7 @@ Function Invoke-Alerter {
         $Command
     )
     Begin {
-        $CommandPath = (Resolve-Path "$PSScriptRoot/../Bin/alerter").Path
+        $CommandPath = (Resolve-Path (Join-Path -Path $MyInvocation.MyCommand.Module.ModuleBase -ChildPath 'Bin/alerter')).Path
     }
     Process {
         If ($PSCmdlet.ShouldProcess('Invoke-Expression',"$CommandPath $Command")){

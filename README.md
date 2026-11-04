@@ -1,7 +1,7 @@
 # PowerShell-MacNotify
 
 [![Build Status](https://github.com/markwragg/Powershell-MacNotify/actions/workflows/build.yml/badge.svg)](https://github.com/markwragg/Powershell-MacNotify/actions/workflows/build.yml)
-![Test Coverage](https://img.shields.io/badge/coverage-55%25-red.svg?maxAge=60)
+![Test Coverage](https://img.shields.io/badge/coverage-98%25-brightgreen.svg?maxAge=60)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/MacNotify?label=PS%20Gallery)](https://www.powershellgallery.com/packages/MacNotify)
 [![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/MacNotify?color=D3D3D3)](https://www.powershellgallery.com/packages/MacNotify)
 
