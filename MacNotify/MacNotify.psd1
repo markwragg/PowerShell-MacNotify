@@ -101,13 +101,13 @@ PrivateData = @{
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/markwragg/PowerShell-MacNotify'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'https://github.com/markwragg/PowerShell-MacNotify/blob/master/CHANGELOG.md'
 
         # Prerelease string of this module
         # Prerelease = ''
