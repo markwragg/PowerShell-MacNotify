@@ -98,13 +98,13 @@ PrivateData = @{
         Tags = 'MacOS','Notification','Notify','PSCore'
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/markwragg/PowerShell-MacNotify/blob/master/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/markwragg/PowerShell-MacNotify'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://raw.githubusercontent.com/markwragg/PowerShell-MacNotify/master/macnotify-logo.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://github.com/markwragg/PowerShell-MacNotify/blob/master/CHANGELOG.md'

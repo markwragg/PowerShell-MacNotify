@@ -1,13 +1,13 @@
 # PowerShell-MacNotify
 
+[<img src="macnotify-logo.png" align="right" width="100">](https://www.powershellgallery.com/packages/macnotify)
+
 [![Build Status](https://github.com/markwragg/Powershell-MacNotify/actions/workflows/build.yml/badge.svg)](https://github.com/markwragg/Powershell-MacNotify/actions/workflows/build.yml)
 ![Test Coverage](https://img.shields.io/badge/coverage-98%25-brightgreen.svg?maxAge=60)
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/MacNotify?label=PS%20Gallery)](https://www.powershellgallery.com/packages/MacNotify)
 [![PowerShell Gallery Downloads](https://img.shields.io/powershellgallery/dt/MacNotify?color=D3D3D3)](https://www.powershellgallery.com/packages/MacNotify)
 
 This PowerShell module contains cmdlets for triggering notifications to appear on MacOS.
-
-![alt text](https://github.com/markwragg/PowerShell-MacNotify/raw/master/Media/Invoke-StackOverflowAlert.png "Example of Invoke-StackOverflowAlert")
 
 ## Installation
 
@@ -34,6 +34,7 @@ You can use `Invoke-AlerterNotification` to trigger a notification to appear wit
 
 - [Invoke-StackOverflowAlert](https://github.com/markwragg/PowerShell-MacNotify/blob/master/Examples/Invoke-StackOverflowAlert.ps1) -- This example code shows how you could configure a PowerShell script to run as a cron job to notify you of new StackOverflow questions on a specified tag. By using Alerter for the notification you can then also configure it to take you directly to the question when "Show" is clicked.
 
+![alt text](https://github.com/markwragg/PowerShell-MacNotify/raw/master/Media/Invoke-StackOverflowAlert.png "Example of Invoke-StackOverflowAlert")
 
 ### Invoke-MacNotification
 
